@@ -5,6 +5,7 @@ import TodoList from './TodoList.css';
 class ToDoList extends Component {
   state = {
     list: [],
+    color: '',
     valueInput: ''
   }
 
@@ -28,31 +29,32 @@ class ToDoList extends Component {
   removeTask = (props)=> {
     this.state.list.splice(props, 1)
     this.setState({list: this.state.list})
+
     console.log(this.state.list)
   };
 
   render() {
     return (
       <div className="wrapper">
-        <input
-          value={this.state.valueInput}
-          onChange={this.handleChangeInput}
-          type="text"
-        />
-        <button onClick={this.addTaskToList} >
-          Add task
-        </button>
+        <div className="form-container">
+          <input
+            value={this.state.valueInput}
+            onChange={this.handleChangeInput}
+            type="text"
+          />
+          <button onClick={this.addTaskToList} >
+            Add task
+          </button>
+        </div>
         <div className="task-container">
             {
-              this.state.list.map((task, index) => (
+              this.state.list.map((task, key) => (
                 <TaskList
                   text={task}
-                  index={index}
+                  key={key}
                   list={this.state.list}
                   removeTask={this.removeTask}
                   >{task}
-
-
                 </TaskList>
               ))
             }
