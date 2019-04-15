@@ -17,12 +17,19 @@ class ToDoList extends Component {
     }
       console.log(this.state.list)
   }
+
   handleChangeInput = (e) => {
     console.log(e.target.value)
     this.setState({
       valueInput: e.target.value
     })
   }
+
+  removeTask = (props)=> {
+    this.state.list.splice(props, 1)
+    this.setState({list: this.state.list})
+    console.log(this.state.list)
+  };
 
   render() {
     return (
@@ -40,7 +47,13 @@ class ToDoList extends Component {
               this.state.list.map((task, index) => (
                 <TaskList
                   text={task}
-                  key={index}>{task}</TaskList>
+                  index={index}
+                  list={this.state.list}
+                  removeTask={this.removeTask}
+                  >{task}
+
+
+                </TaskList>
               ))
             }
         </div>
